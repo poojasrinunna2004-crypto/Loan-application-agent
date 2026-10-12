@@ -4,6 +4,14 @@ from app import database
 from app.api import app
 
 
+def test_root_redirects_to_api_docs():
+    with TestClient(app) as client:
+        response = client.get("/", follow_redirects=False)
+
+    assert response.status_code == 307
+    assert response.headers["location"] == "/docs"
+
+
 def test_submission_requires_explicit_confirmation(tmp_path, monkeypatch):
     monkeypatch.setattr(database, "DB_PATH", tmp_path / "test.db")
     database.initialize_database()

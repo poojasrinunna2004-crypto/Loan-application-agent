@@ -2,6 +2,7 @@ from contextlib import asynccontextmanager
 from typing import Any
 
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import RedirectResponse
 
 from app import database, service
 from app.schemas import ApplicationDraft, SubmissionConfirmation
@@ -18,6 +19,11 @@ app = FastAPI(
     description="Training API backed only by fictional local data.",
     lifespan=lifespan,
 )
+
+
+@app.get("/", include_in_schema=False)
+def root() -> RedirectResponse:
+    return RedirectResponse(url="/docs")
 
 
 @app.get("/health")
