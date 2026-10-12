@@ -28,7 +28,14 @@ def test_docs_serves_friendly_guide_and_swagger_remains_available():
     assert guide.text.count('class="response-summary"') == 3
     assert '"confirmation": true' in guide.text
     assert swagger.status_code == 200
-    assert "Swagger UI" in swagger.text
+    assert "Interactive API | Loan Studio" in swagger.text
+    assert "/static/swagger.css" in swagger.text
+
+    schema = client.get("/openapi.json").json()
+    assert schema["paths"]["/customers"]["get"]["tags"] == ["Getting started"]
+    assert schema["paths"]["/applications"]["post"]["tags"] == ["Loan applications"]
+
+    assert client.get("/static/swagger.css").status_code == 200
 
 
 def test_submission_requires_explicit_confirmation(tmp_path, monkeypatch):
