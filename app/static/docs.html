@@ -63,10 +63,19 @@
                         <h3>Check service status</h3>
                         <p>Returns whether the mock API is running. Render uses this route for its health check.</p>
                     </div>
-                    <pre class="response-example"><code>{
-  "status": "ok",
-  "mode": "mock-only"
-}</code></pre>
+                    <div class="response-summary">
+                        <div class="response-summary-heading">
+                            <span class="status-indicator" aria-hidden="true"></span>
+                            <strong>Service is online</strong>
+                            <span class="result-label">Example response</span>
+                        </div>
+                        <dl class="response-fields">
+                            <div>
+                                <dt>Environment</dt>
+                                <dd>Mock-only</dd>
+                            </div>
+                        </dl>
+                    </div>
                 </article>
 
                 <article class="endpoint-row">
@@ -76,12 +85,26 @@
                         <h3>List sample customers</h3>
                         <p>Returns fictional training records, including each customer's annual income.</p>
                     </div>
-                    <pre class="response-example"><code>[{
-  "id": 1,
-  "name": "Jordan Lee",
-  "email": "jordan.lee@example.test",
-  "annual_income": 72000
-}]</code></pre>
+                    <div class="response-summary">
+                        <div class="customer-preview">
+                            <span class="customer-initials" aria-hidden="true">JL</span>
+                            <div>
+                                <strong>Jordan Lee</strong>
+                                <span class="result-label">Sample customer 1</span>
+                            </div>
+                        </div>
+                        <dl class="response-fields">
+                            <div>
+                                <dt>Email</dt>
+                                <dd>jordan.lee@example.test</dd>
+                            </div>
+                            <div>
+                                <dt>Annual income</dt>
+                                <dd>$72,000</dd>
+                            </div>
+                        </dl>
+                        <p class="result-label">One example from the customer list</p>
+                    </div>
                 </article>
 
                 <article class="endpoint-row">
@@ -92,7 +115,8 @@
                         <p>Creates a draft only. Amount must be greater than $0 and at most $2,000,000; term must be 1
                             to 480 months.</p>
                         <p class="response-note">Returns <code>201 Created</code>. An unknown customer returns
-                            <code>404</code>.</p>
+                            <code>404</code>.
+                        </p>
                     </div>
                     <pre class="request-example"><code>{
   "customer_id": 1,
@@ -111,12 +135,26 @@
                         <h3>Review an application</h3>
                         <p>Returns the saved application and its current status. This request never submits it.</p>
                     </div>
-                    <pre class="response-example"><code>{
-  "id": 12,
-  "status": "draft",
-  "loan_type": "personal",
-  "amount": 12000
-}</code></pre>
+                    <div class="response-summary">
+                        <div class="response-summary-heading">
+                            <strong>Application #12</strong>
+                            <span class="status-chip">Draft</span>
+                        </div>
+                        <dl class="response-fields">
+                            <div>
+                                <dt>Loan type</dt>
+                                <dd>Personal</dd>
+                            </div>
+                            <div>
+                                <dt>Amount</dt>
+                                <dd>$12,000</dd>
+                            </div>
+                            <div>
+                                <dt>Submission</dt>
+                                <dd>Not submitted</dd>
+                            </div>
+                        </dl>
+                    </div>
                 </article>
 
                 <article class="endpoint-row">

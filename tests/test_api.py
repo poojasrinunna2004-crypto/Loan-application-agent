@@ -25,6 +25,8 @@ def test_docs_serves_friendly_guide_and_swagger_remains_available():
     assert guide.status_code == 200
     assert guide.headers["content-type"].startswith("text/html")
     assert "Quick start" in guide.text
+    assert guide.text.count('class="response-summary"') == 3
+    assert '"confirmation": true' in guide.text
     assert swagger.status_code == 200
     assert "Swagger UI" in swagger.text
 
