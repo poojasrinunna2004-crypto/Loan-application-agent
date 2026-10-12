@@ -1,0 +1,257 @@
+.guide-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 38px 0 28px;
+}
+
+.guide-heading h1 {
+    margin-bottom: 8px;
+}
+
+.guide-heading .button {
+    flex: 0 0 auto;
+    text-decoration: none;
+}
+
+.quick-start {
+    padding: 20px 22px 22px;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    background: rgba(255, 255, 255, 0.82);
+}
+
+.quick-start-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.quick-start-heading h2,
+.endpoint-heading h2 {
+    margin: 0;
+    font-size: 17px;
+}
+
+.quick-start-heading p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.quick-steps {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.quick-steps li {
+    display: grid;
+    gap: 7px;
+    align-content: start;
+    min-width: 0;
+    padding: 0 15px;
+    border-left: 1px solid var(--border);
+}
+
+.quick-steps li:first-child {
+    padding-left: 0;
+    border-left: 0;
+}
+
+.quick-steps li>span {
+    color: var(--pink);
+    font-size: 10px;
+    font-weight: 750;
+}
+
+.quick-steps strong {
+    font-size: 11px;
+}
+
+.quick-steps code,
+.endpoint-route code,
+.response-note code {
+    color: var(--muted);
+    font-family: Consolas, "SFMono-Regular", monospace;
+    font-size: 10px;
+    overflow-wrap: anywhere;
+}
+
+.endpoint-section {
+    margin-top: 34px;
+}
+
+.endpoint-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.endpoint-heading .eyebrow {
+    margin-bottom: 5px;
+}
+
+.endpoint-count {
+    padding-bottom: 2px;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.endpoint-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(250px, 0.72fr);
+    align-items: center;
+    gap: 28px;
+    padding: 20px 0;
+    border-top: 1px solid var(--border);
+}
+
+.endpoint-route {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.method-tag {
+    min-width: 42px;
+    padding: 5px 7px;
+    border-radius: 4px;
+    font-size: 9px;
+    font-weight: 750;
+    text-align: center;
+}
+
+.method-get {
+    color: var(--violet);
+    background: var(--surface-violet);
+}
+
+.method-post {
+    color: #9d3268;
+    background: var(--surface-pink);
+}
+
+.endpoint-description h3 {
+    margin: 0 0 5px;
+    font-size: 13px;
+}
+
+.endpoint-description p {
+    max-width: 570px;
+    margin: 0;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.endpoint-description .response-note {
+    margin-top: 6px;
+    color: var(--ink);
+}
+
+.response-example,
+.request-example {
+    min-width: 0;
+    margin: 0;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    color: #514657;
+    background: linear-gradient(135deg, #fbf8ff, #fffafd);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.response-example code,
+.request-example code {
+    font-family: Consolas, "SFMono-Regular", monospace;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.guide-safety {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 22px;
+    padding: 14px 16px;
+    border: 1px solid #f0d8e6;
+    border-radius: 6px;
+    background: var(--surface-pink);
+}
+
+.safety-mark {
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    color: #9d3268;
+    background: #fff;
+    font-family: Georgia, serif;
+    font-weight: 700;
+}
+
+.guide-safety p {
+    margin: 0;
+    color: #6e5869;
+    font-size: 11px;
+    line-height: 1.55;
+}
+
+@media (max-width: 760px) {
+    .guide-heading {
+        align-items: start;
+        flex-direction: column;
+        padding-top: 30px;
+    }
+
+    .quick-steps {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        row-gap: 18px;
+    }
+
+    .quick-steps li:nth-child(3) {
+        padding-left: 0;
+        border-left: 0;
+    }
+
+    .endpoint-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .quick-start {
+        padding: 17px;
+    }
+
+    .quick-start-heading {
+        align-items: start;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .quick-steps li {
+        padding: 0 10px;
+    }
+
+    .endpoint-route {
+        align-items: flex-start;
+    }
+
+    .endpoint-route code {
+        padding-top: 3px;
+    }
+}

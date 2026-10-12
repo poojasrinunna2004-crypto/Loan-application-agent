@@ -28,13 +28,13 @@ In another terminal, with the same virtual environment active, start the desktop
 python -m app.desktop
 ```
 
-The browser application is available at http://127.0.0.1:8000, and API documentation is at http://127.0.0.1:8000/docs. The SQLite database is created at `data/loan_agent.db`; set `LOAN_AGENT_DB_PATH` to use another local file.
+The browser application is available at http://127.0.0.1:8000, the API guide is at http://127.0.0.1:8000/docs, and the interactive Swagger console is at http://127.0.0.1:8000/swagger. The SQLite database is created at `data/loan_agent.db`; set `LOAN_AGENT_DB_PATH` to use another local file.
 
 To point the desktop client at a deployed API, set `LOAN_AGENT_API_URL` to its base URL before starting the client. If unset, it uses the local API URL above.
 
 ## Deploy on Render
 
-The `render.yaml` Blueprint deploys the FastAPI service and browser application. In Render, create a new Blueprint and select this GitHub repository. After deployment, open the service URL for the browser app or append `/docs` to use the REST API.
+The `render.yaml` Blueprint deploys the FastAPI service and browser application. In Render, create a new Blueprint and select this GitHub repository. After deployment, open the service URL for the browser app, append `/docs` for the API guide, or `/swagger` for the interactive console.
 
 The free web service uses an ephemeral filesystem, so its SQLite database can reset when the service restarts or redeploys. This deployment is for mock training data only, not production or real customer applications. Keep the desktop client local and set `LOAN_AGENT_API_URL` to the Render service URL if you want it to use the hosted mock API.
 

@@ -19,6 +19,8 @@ async def lifespan(_: FastAPI):
 app = FastAPI(
     title="Mock Loan Application API",
     description="Training API backed only by fictional local data.",
+    docs_url="/swagger",
+    redoc_url="/reference",
     lifespan=lifespan,
 )
 STATIC_DIR = Path(__file__).parent / "static"
@@ -28,6 +30,11 @@ app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 @app.get("/", include_in_schema=False)
 def root() -> FileResponse:
     return FileResponse(STATIC_DIR / "index.html")
+
+
+@app.get("/docs", include_in_schema=False)
+def api_guide() -> FileResponse:
+    return FileResponse(STATIC_DIR / "docs.html")
 
 
 @app.get("/health")

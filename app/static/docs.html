@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#fff8fc">
+    <title>API guide | Loan Studio</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="/static/docs.css">
+</head>
+
+<body>
+    <div class="app-shell docs-shell">
+        <header class="topbar">
+            <a class="brand" href="/" aria-label="Loan Studio application">
+                <span class="brand-mark" aria-hidden="true">L</span>
+                <span>Loan Studio</span>
+            </a>
+            <div class="topbar-tools">
+                <span class="environment-pill"><span class="environment-dot"></span>Mock environment</span>
+                <a class="docs-link" href="/">Application</a>
+            </div>
+        </header>
+
+        <main>
+            <section class="guide-heading" aria-labelledby="guide-title">
+                <div>
+                    <p class="eyebrow">API QUICK GUIDE</p>
+                    <h1 id="guide-title">Work with the mock API</h1>
+                    <p class="page-subtitle">Prepare, review, and explicitly confirm fictional loan applications.</p>
+                </div>
+                <a class="button button-violet" href="/swagger">Open interactive API</a>
+            </section>
+
+            <section class="quick-start" aria-labelledby="quick-start-title">
+                <div class="quick-start-heading">
+                    <h2 id="quick-start-title">Quick start</h2>
+                    <p>Follow these steps to create a mock application.</p>
+                </div>
+                <ol class="quick-steps">
+                    <li><span>01</span><strong>Choose a sample</strong><code>GET /customers</code></li>
+                    <li><span>02</span><strong>Save a draft</strong><code>POST /applications</code></li>
+                    <li><span>03</span><strong>Review details</strong><code>GET /applications/{id}</code></li>
+                    <li><span>04</span><strong>Confirm submission</strong><code>POST /applications/{id}/submit</code>
+                    </li>
+                </ol>
+            </section>
+
+            <section class="endpoint-section" aria-labelledby="endpoint-title">
+                <div class="endpoint-heading">
+                    <div>
+                        <p class="eyebrow">REFERENCE</p>
+                        <h2 id="endpoint-title">Available endpoints</h2>
+                    </div>
+                    <span class="endpoint-count">5 endpoints</span>
+                </div>
+
+                <article class="endpoint-row">
+                    <div class="endpoint-description">
+                        <div class="endpoint-route"><span class="method-tag method-get">GET</span><code>/health</code>
+                        </div>
+                        <h3>Check service status</h3>
+                        <p>Returns whether the mock API is running. Render uses this route for its health check.</p>
+                    </div>
+                    <pre class="response-example"><code>{
+  "status": "ok",
+  "mode": "mock-only"
+}</code></pre>
+                </article>
+
+                <article class="endpoint-row">
+                    <div class="endpoint-description">
+                        <div class="endpoint-route"><span
+                                class="method-tag method-get">GET</span><code>/customers</code></div>
+                        <h3>List sample customers</h3>
+                        <p>Returns fictional training records, including each customer's annual income.</p>
+                    </div>
+                    <pre class="response-example"><code>[{
+  "id": 1,
+  "name": "Jordan Lee",
+  "email": "jordan.lee@example.test",
+  "annual_income": 72000
+}]</code></pre>
+                </article>
+
+                <article class="endpoint-row">
+                    <div class="endpoint-description">
+                        <div class="endpoint-route"><span
+                                class="method-tag method-post">POST</span><code>/applications</code></div>
+                        <h3>Create a draft</h3>
+                        <p>Creates a draft only. Amount must be greater than $0 and at most $2,000,000; term must be 1
+                            to 480 months.</p>
+                        <p class="response-note">Returns <code>201 Created</code>. An unknown customer returns
+                            <code>404</code>.</p>
+                    </div>
+                    <pre class="request-example"><code>{
+  "customer_id": 1,
+  "loan_type": "personal",
+  "amount": 12000,
+  "term_months": 36,
+  "purpose": "Home repairs"
+}</code></pre>
+                </article>
+
+                <article class="endpoint-row">
+                    <div class="endpoint-description">
+                        <div class="endpoint-route"><span
+                                class="method-tag method-get">GET</span><code>/applications/{application_id}</code>
+                        </div>
+                        <h3>Review an application</h3>
+                        <p>Returns the saved application and its current status. This request never submits it.</p>
+                    </div>
+                    <pre class="response-example"><code>{
+  "id": 12,
+  "status": "draft",
+  "loan_type": "personal",
+  "amount": 12000
+}</code></pre>
+                </article>
+
+                <article class="endpoint-row">
+                    <div class="endpoint-description">
+                        <div class="endpoint-route"><span
+                                class="method-tag method-post">POST</span><code>/applications/{application_id}/submit</code>
+                        </div>
+                        <h3>Submit after confirmation</h3>
+                        <p>Changes a draft to submitted only after the user has reviewed it and explicitly confirmed.
+                        </p>
+                        <p class="response-note">Missing or false confirmation returns <code>400</code>. No bank is
+                            contacted.</p>
+                    </div>
+                    <pre class="request-example"><code>{
+  "confirmation": true
+}</code></pre>
+                </article>
+            </section>
+
+            <aside class="guide-safety" aria-label="Training environment notice">
+                <span class="safety-mark" aria-hidden="true">!</span>
+                <p><strong>Mock environment only.</strong> The API uses fictional sample data and a local SQLite
+                    database. It does not connect to a bank or submit real applications.</p>
+            </aside>
+        </main>
+
+        <footer class="footer-note">Loan Studio <span aria-hidden="true">·</span> API guide</footer>
+    </div>
+</body>
+
+</html>

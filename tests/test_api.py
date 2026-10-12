@@ -17,6 +17,18 @@ def test_root_serves_browser_application():
         assert asset.status_code == 200
 
 
+def test_docs_serves_friendly_guide_and_swagger_remains_available():
+    with TestClient(app) as client:
+        guide = client.get("/docs")
+        swagger = client.get("/swagger")
+
+    assert guide.status_code == 200
+    assert guide.headers["content-type"].startswith("text/html")
+    assert "Quick start" in guide.text
+    assert swagger.status_code == 200
+    assert "Swagger UI" in swagger.text
+
+
 def test_submission_requires_explicit_confirmation(tmp_path, monkeypatch):
     monkeypatch.setattr(database, "DB_PATH", tmp_path / "test.db")
     database.initialize_database()
