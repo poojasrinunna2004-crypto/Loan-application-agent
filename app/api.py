@@ -54,4 +54,3 @@ def submit_application(
         return service.submit_application(application_id, request.confirmation)
     except ValueError as error:
         raise HTTPException(status_code=400, detail=str(error)) from error
-database.initialize_database()

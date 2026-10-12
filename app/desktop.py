@@ -1,10 +1,11 @@
 import json
+import os
 import tkinter as tk
 from tkinter import messagebox, ttk
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
-API_URL = "http://127.0.0.1:8000"
+API_URL = os.environ.get("LOAN_AGENT_API_URL", "http://127.0.0.1:8000").rstrip("/")
 COLORS = {
     "canvas": "#FFF7FB",
     "surface": "#FFFCFE",
