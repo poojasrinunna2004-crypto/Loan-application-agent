@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#fff8fc">
+    <title>Loan application | Mock banking</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="/static/app.js" defer></script>
+</head>
+
+<body>
+    <div class="app-shell">
+        <header class="topbar">
+            <a class="brand" href="/" aria-label="Loan Studio home">
+                <span class="brand-mark" aria-hidden="true">L</span>
+                <span>Loan Studio</span>
+            </a>
+            <div class="topbar-tools">
+                <span class="environment-pill"><span class="environment-dot"></span>Mock environment</span>
+                <a class="docs-link" href="/docs">API docs</a>
+            </div>
+        </header>
+
+        <main>
+            <section class="page-heading" aria-labelledby="page-title">
+                <p class="eyebrow">APPLICATION WORKSPACE</p>
+                <h1 id="page-title">Start a loan application</h1>
+                <p class="page-subtitle">Use a fictional sample customer, then review the details before confirming.</p>
+            </section>
+
+            <div class="workspace">
+                <section class="form-panel" aria-labelledby="details-title">
+                    <div class="section-heading">
+                        <span class="section-index">01</span>
+                        <div>
+                            <h2 id="details-title">Application details</h2>
+                            <p>All fields are required for this training demo.</p>
+                        </div>
+                    </div>
+
+                    <form id="application-form" novalidate>
+                        <div class="field-block">
+                            <label for="customer">Sample customer</label>
+                            <select id="customer" name="customer_id" required disabled>
+                                <option value="">Loading sample customers...</option>
+                            </select>
+                            <p class="field-hint" id="customer-income">Fictional training records only</p>
+                        </div>
+
+                        <div class="field-block">
+                            <label for="loan-type">Loan type</label>
+                            <select id="loan-type" name="loan_type" required>
+                                <option value="personal">Personal</option>
+                                <option value="auto">Auto</option>
+                                <option value="home">Home</option>
+                                <option value="business">Business</option>
+                            </select>
+                        </div>
+
+                        <div class="field-row">
+                            <div class="field-block">
+                                <label for="amount">Loan amount <span class="label-unit">USD</span></label>
+                                <div class="input-prefix">
+                                    <span aria-hidden="true">$</span>
+                                    <input id="amount" name="amount" type="number" min="0.01" max="2000000" step="0.01"
+                                        placeholder="e.g. 12,000" required>
+                                </div>
+                                <p class="field-hint">Up to $2,000,000</p>
+                            </div>
+                            <div class="field-block">
+                                <label for="term">Repayment period</label>
+                                <div class="input-suffix">
+                                    <input id="term" name="term_months" type="number" min="1" max="480" step="1"
+                                        value="36" required>
+                                    <span>months</span>
+                                </div>
+                                <p class="field-hint">Choose 1 to 480 months</p>
+                            </div>
+                        </div>
+
+                        <div class="field-block">
+                            <label for="purpose">Purpose of the loan</label>
+                            <textarea id="purpose" name="purpose" rows="3" minlength="5" maxlength="500"
+                                placeholder="Briefly describe what the loan is for" required></textarea>
+                            <p class="field-hint">5 to 500 characters</p>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="button button-pink" id="create-draft" type="submit" disabled>Save draft for
+                                review</button>
+                            <p class="form-note">Saving creates a draft only. Nothing is submitted yet.</p>
+                        </div>
+                    </form>
+                    <p class="form-feedback" id="form-feedback" role="status" aria-live="polite"></p>
+                </section>
+
+                <aside class="review-panel" aria-labelledby="review-title">
+                    <div class="review-topline">
+                        <span class="section-index section-index-violet">02</span>
+                        <span class="draft-badge" id="draft-badge" data-state="empty">Not saved</span>
+                    </div>
+                    <h2 id="review-title">Review application</h2>
+                    <p class="review-intro">Check the details below. You can submit only after saving a draft and
+                        confirming.</p>
+
+                    <dl class="review-list">
+                        <div class="review-row">
+                            <dt>Customer</dt>
+                            <dd id="review-customer">Choose a sample customer</dd>
+                        </div>
+                        <div class="review-row">
+                            <dt>Annual income</dt>
+                            <dd id="review-income">-</dd>
+                        </div>
+                        <div class="review-row">
+                            <dt>Loan type</dt>
+                            <dd id="review-type">Personal</dd>
+                        </div>
+                        <div class="review-row">
+                            <dt>Loan amount</dt>
+                            <dd id="review-amount">-</dd>
+                        </div>
+                        <div class="review-row">
+                            <dt>Repayment</dt>
+                            <dd id="review-term">36 months</dd>
+                        </div>
+                        <div class="review-row review-purpose-row">
+                            <dt>Purpose</dt>
+                            <dd id="review-purpose">-</dd>
+                        </div>
+                    </dl>
+
+                    <p class="review-safety">This demo stores fictional applications locally. It does not contact a
+                        bank.</p>
+                    <div class="review-actions" id="review-actions" hidden>
+                        <button class="button button-violet" id="confirm-submit" type="button" disabled>Confirm mock
+                            submission</button>
+                        <button class="button button-quiet" id="start-over" type="button">Start a new
+                            application</button>
+                    </div>
+                </aside>
+            </div>
+        </main>
+
+        <footer class="footer-note">Training demo <span aria-hidden="true">·</span> Fictional customer records</footer>
+    </div>
+
+    <dialog class="confirmation-dialog" id="confirmation-dialog" aria-labelledby="dialog-title">
+        <form method="dialog">
+            <p class="eyebrow">FINAL REVIEW</p>
+            <h2 id="dialog-title">Confirm mock submission</h2>
+            <p id="dialog-summary" class="dialog-summary"></p>
+            <p class="dialog-warning">This only updates the local mock database. No real bank will be contacted.</p>
+            <div class="dialog-actions">
+                <button class="button button-quiet" value="cancel">Keep as draft</button>
+                <button class="button button-violet" id="dialog-confirm" type="button">Submit mock application</button>
+            </div>
+        </form>
+    </dialog>
+</body>
+
+</html>

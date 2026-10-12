@@ -4,12 +4,17 @@ from app import database
 from app.api import app
 
 
-def test_root_redirects_to_api_docs():
+def test_root_serves_browser_application():
     with TestClient(app) as client:
-        response = client.get("/", follow_redirects=False)
+        response = client.get("/")
 
-    assert response.status_code == 307
-    assert response.headers["location"] == "/docs"
+    assert response.status_code == 200
+    assert response.headers["content-type"].startswith("text/html")
+    assert "Loan application" in response.text
+
+    for asset_path in ("/static/styles.css", "/static/app.js"):
+        asset = client.get(asset_path)
+        assert asset.status_code == 200
 
 
 def test_submission_requires_explicit_confirmation(tmp_path, monkeypatch):
